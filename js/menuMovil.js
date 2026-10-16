@@ -1,41 +1,45 @@
-(function(){
-  // Propiedades menú móvil
+(function () {
+  var button = document.getElementById('burger_menu');
+  var menu = document.getElementById('slideMenu');
+  var icon = button.querySelector('i');
+  var mobileViewport = window.matchMedia('(max-width: 800px)');
 
-  var propMenu = {
-    burger_menu: document.getElementById('burger_menu'),
-    slideMenu: document.getElementById('slideMenu'),
-    menu_activo: false,
-    elem_menu: document.querySelectorAll('#slideMenu .menu-principal a')
+  function setOpen(open) {
+    menu.classList.toggle('active', open);
+    menu.inert = !open;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    icon.classList.toggle('fa-bars', !open);
+    icon.classList.toggle('fa-times', open);
   }
 
+  button.addEventListener('click', function () {
+    setOpen(button.getAttribute('aria-expanded') !== 'true');
+  });
 
-  // Métodos menú móvil
-
-  var metMenu = {
-    inicio: function(){
-      propMenu.burger_menu.addEventListener('click', metMenu.toggleMenu);
-
-      for (var i = 0; i < propMenu.elem_menu.length; i++) {
-        propMenu.elem_menu[i].addEventListener('click', metMenu.ocultarMenu);
-      }
-
-    },
-
-    toggleMenu: function(){
-      if (propMenu.menu_activo == false) {
-        propMenu.menu_activo = true;
-        propMenu.slideMenu.className = propMenu.slideMenu.className + ' active';
-      } else {
-        propMenu.menu_activo = false;
-        propMenu.slideMenu.className = propMenu.slideMenu.className.replace('active', '');
-      }
-    },
-
-    ocultarMenu: function(){
-      propMenu.menu_activo = false;
-      propMenu.slideMenu.className = propMenu.slideMenu.className.replace('active', '');
+  menu.addEventListener('click', function (event) {
+    if (event.target.closest('a')) {
+      setOpen(false);
+      button.focus();
     }
-  }
+  });
 
-  metMenu.inicio();
-}())
+  document.addEventListener('click', function (event) {
+    if (!menu.contains(event.target) && !button.contains(event.target)) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      button.focus();
+    }
+  });
+
+  mobileViewport.addEventListener('change', function () {
+    setOpen(false);
+  });
+
+  setOpen(false);
+}());
