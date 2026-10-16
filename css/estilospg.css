@@ -128,7 +128,7 @@ header .menu-bar-movil .burger-menu:focus-visible {
 header .menu-bar-movil .slideMenu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   background: #ffffff;
   text-align: center;
   padding: 1.25rem 2.25rem;
@@ -136,12 +136,12 @@ header .menu-bar-movil .slideMenu {
   max-height: calc(100dvh - 5.875rem);
   overflow-y: auto;
   visibility: hidden;
-  transform: translateX(-100%);
+  transform: translateY(-0.5rem);
   transition: transform .3s ease, visibility .3s;
 }
 header .menu-bar-movil .slideMenu.active {
   visibility: visible;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 header .menu-bar-movil .slideMenu .top-redes {
   margin-bottom: 0.625rem;
