@@ -172,7 +172,7 @@ header{
     .slideMenu{
       position: absolute;
       top: 100%;
-      left: 0;
+      right: 0;
       background: @blanco;
       text-align: center;
       padding: 1.25rem 2.25rem;
@@ -180,12 +180,12 @@ header{
       max-height: calc(100dvh - 5.875rem);
       overflow-y: auto;
       visibility: hidden;
-      transform: translateX(-100%);
+      transform: translateY(-0.5rem);
       transition: transform .3s ease, visibility .3s;
 
       &.active{
         visibility: visible;
-        transform: translateX(0);
+        transform: translateY(0);
       }
 
       .top-redes{
