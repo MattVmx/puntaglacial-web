@@ -108,24 +108,40 @@ header .menu-bar-movil {
 header .menu-bar-movil .logo {
   max-width: 12.5rem;
 }
-header .menu-bar-movil .burger_menu {
+header .menu-bar-movil .burger-menu {
   cursor: pointer;
   font-size: 2.1875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: #181612;
+}
+header .menu-bar-movil .burger-menu:focus-visible {
+  outline: 2px solid #ca2072;
+  outline-offset: 2px;
 }
 header .menu-bar-movil .slideMenu {
-  position: fixed;
-  top: 8.875rem;
-  left: -80%;
+  position: absolute;
+  top: 100%;
+  right: 0;
   background: #ffffff;
   text-align: center;
   padding: 1.25rem 2.25rem;
   width: 80%;
-  -webkit-box-sizing: all .3s ease;
-  -o-box-sizing: all .3s ease;
-  transition: all .3s ease;
+  max-height: calc(100dvh - 5.875rem);
+  overflow-y: auto;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: transform .3s ease, visibility .3s;
 }
 header .menu-bar-movil .slideMenu.active {
-  left: 0;
+  visibility: visible;
+  transform: translateY(0);
 }
 header .menu-bar-movil .slideMenu .top-redes {
   margin-bottom: 0.625rem;
